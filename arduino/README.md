@@ -14,4 +14,6 @@ PWM:
 
 'vN' onde N é a porcentagem do PWM (0 a 100%). ex: 'v50' para 50% do PWM. 
 
+p.s: Adicionar a biblitoeca Ticker zipada no 'Library Manager' do Arduino.
+
  
