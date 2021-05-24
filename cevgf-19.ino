@@ -1,22 +1,20 @@
 
-#include <Ticker.h>
+#include "Ticker.h"
 
-/**************************************/
+/*****************************************************************/
  /*
-  * Só mexer nos DEFINES.
+  * You just have to modify the '#define's with you project especs
  */
-/**************************************/
+/*****************************************************************/
 
-#define M_RPM 4 //Motor Mabuchi 4RPM
-#define M_PIN 3 //Pino do Motor
-/*Pinos de Controle Direcional do Driver de Motor. Utilizei o ci L293D" */
+#define M_RPM 4 // Mabuchi 4RPM Motor 
+#define M_PIN 3 // Motor pin
+/* Directional Control pins of motor driver. Used L293D ic */
 #define M_DRIVER_PIN1 4
 #define M_DRIVER_PIN2 5
 
 void inhale();
 void exhale();
-
-//double a = ;
 double cyclePerTime = (double(1)/(M_RPM/double(60)))*double(1000);
 double Ti = cyclePerTime/double(2), Te = cyclePerTime/double(2);
 int pwmDutyCycle;
@@ -27,7 +25,7 @@ int pwmPercent;
 Ticker timer1(inhale, Ti);
 Ticker timer2(exhale, Te); 
 
-String sdata="";  // Initialised to nothing.
+String sdata=""; 
 byte test,start;
 
 void setup()
@@ -37,8 +35,7 @@ void setup()
   pinMode(M_DRIVER_PIN2, OUTPUT); digitalWrite(M_DRIVER_PIN2, HIGH);
   pinMode(LED_BUILTIN, OUTPUT); digitalWrite(LED_BUILTIN, HIGH);
   Serial.begin(115200);
-  Serial.println("CERGF-19 beta do beta v0.2.");
-  //Serial.println(cyclePerTime);
+  Serial.println("CEVGF-19 v0.2.");
   timer1.start();
 }
 void loop()
@@ -54,8 +51,6 @@ void loop()
          // Process command in sdata.
          switch( sdata.charAt(0) ) {
          case 't':
-            //test = 1;
-            //Serial.println("Test");
             if (sdata.length()>1){
                TiTe = (sdata.substring(1)).toInt();
             }
@@ -80,25 +75,25 @@ void loop()
   
   switch (TiTe) {
     case 11:
-      //Serial.println("Ti:Te = 1:1");
+      Serial.println("Ti:Te = 1:1");
       Ti = cyclePerTime/double(2);
       Te = cyclePerTime/double(2);
     break;
     
     case 12:
-      //Serial.println("Ti:Te = 1:2");
+      Serial.println("Ti:Te = 1:2");
       Ti = cyclePerTime/double(2);
       Te = cyclePerTime/double(4);
     break;
     
     case 13:
-      //Serial.println("Ti:Te = 1:3");
+      Serial.println("Ti:Te = 1:3");
       Ti = cyclePerTime/double(2);
       Te = cyclePerTime/double(6);
     break;
 
     default:
-      //Serial.println("Ti:Te = 1:1");
+      Serial.println("Ti:Te = 1:1");
       Ti = cyclePerTime/double(2);
       Te = cyclePerTime/double(2);
   }
@@ -109,20 +104,16 @@ void loop()
 }
 
 void inhale() {
-  //Serial.println("750ms... 1" );
   timer1.pause();
   timer2.start();
-  //Serial.println(timer1.elapsed());
   analogWrite(M_PIN, pwmDutyCycle);
   digitalWrite(LED_BUILTIN, LOW);
    
 }
 
 void exhale() {
-  //Serial.println("750ms... 2");
   timer2.pause();
   timer1.start();
-  //Serial.println(timer2.elapsed());
   analogWrite(M_PIN, pwmDutyCycle);
   digitalWrite(LED_BUILTIN, HIGH);
 }

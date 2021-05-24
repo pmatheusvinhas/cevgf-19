@@ -1,0 +1,3 @@
+[submodule "Ticker"]
+	path = Ticker
+	url = https://github.com/sstaub/Ticker.git
