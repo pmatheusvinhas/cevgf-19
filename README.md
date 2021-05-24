@@ -6,7 +6,8 @@ This project has borned in the middle of the Covid-19 pandemics when I was tryin
 As an Embedded Software Enginneer I went to the ventilators projects side and my way to help was to create a general firmware that could help max projects as possible.
 
 The initial versions of this project intent to create an ease deploy firmware to be deployed by Mechanical Engineers and ones with none or little knowledge of microcontrolers. Arduino platform sounded a good choice but in stable version I expect to work with RTOS because of the necessity of time realiability.
-Installation
+
+## Installation
 
 1. Clone this repo in `--recursive`
 2. Open `cevgf-19.ino` with Arduino IDE and upload it to your board (Tested in Arduino UNO)
